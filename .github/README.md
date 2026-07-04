@@ -41,6 +41,40 @@
 
 - [![](https://www.google.com/s2/favicons?size=64&domain=https://github.com)dns_domain_check](https://github.com/n138-kz/dns_domain_check/)
 
+## How to use
+
+1. JSONファイルを作成する
+  ファイル名: `check-domain.json`
+  内容: 
+  ```json
+  [
+    {
+      "domain": "example.org",
+      "type": "A",
+      "expectedvalue": "104.20.26.136"
+    }
+  ]
+  ```
+2. python3 コマンド経由でスクリプトを実行する。
+  ```sh
+  python3 dns_check.py
+  ```
+
+---
+
+1. python3 コマンド経由でスクリプトを実行する。
+  ```sh
+  python3 dns_check.py --domain example.org --type a --value 104.20.26.136
+  ```
+
+  実行結果例:
+  ```sh
+  # python3 dns_check.py --domain example.org --type a --value 104.20.26.136
+  Checking: example.org (A) using System Default DNS...
+    => [OK] 期待値が含まれています。 (検出: ['172.66.157.237', '104.20.26.136'])
+  ----------------------------------------
+  ```
+
 ## License
 
 [Copyright (c) 2026 Yuu Komiya (n138), Under MIT License](LICENSE)  
