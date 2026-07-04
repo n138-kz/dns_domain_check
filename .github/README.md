@@ -43,6 +43,8 @@
 
 ## How to use
 
+- Python version: 3.7 or over
+
 1. JSONファイルを作成する
   ファイル名: `check-domain.json`  
   内容:   
