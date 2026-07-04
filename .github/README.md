@@ -83,8 +83,8 @@
     > python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
     Checking: dns.google (A) using System Default DNS...
       => [OK] 期待値が含まれています。 (検出: ['8.8.4.4', '8.8.8.8'])
-----------------------------------------
-  ```
+    ----------------------------------------
+    ```
 
 ## License
 
