@@ -46,43 +46,43 @@
 - Python version: 3.7 or over
 
 1. 依存ライブラリをインストールする
-   ```sh
-   python3 -m pip install -r requirements.txt
-   ```
+    ```sh
+    python3 -m pip install -r requirements.txt
+    ```
 2. JSONファイルを作成する
-  ファイル名: `check-domain.json`  
-  内容:   
-  ```json
-  [
-    {
-      "domain": "dns.google",
-      "type": "A",
-      "expectedvalue": "8.8.8.8"
-    }
-  ]
-  ```
+    ファイル名: `check-domain.json`  
+    内容:   
+    ```json
+    [
+      {
+        "domain": "dns.google",
+        "type": "A",
+        "expectedvalue": "8.8.8.8"
+      }
+    ]
+    ```
 3. python3 コマンド経由でスクリプトを実行する。
-  ```sh
-  python3 dns_check.py
-  ```
+    ```sh
+    python3 dns_check.py
+    ```
 
 ---
 
 
 1. 依存ライブラリをインストールする
-  ```sh
-  python3 -m pip install -r requirements.txt
-  ```
+    ```sh
+    python3 -m pip install -r requirements.txt
+    ```
 2. python3 コマンド経由でスクリプトを実行する。
-  ```sh
-  python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
-  ```
+    ```sh
+    python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
+    ```
 
-  実行結果例:
-  ```sh
-  > python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
-  Checking: dns.google (A) using System Default DNS...
-    => [OK] 期待値が含まれています。 (検出: ['8.8.4.4', '8.8.8.8'])
+    実行結果例:
+    ```sh
+    > python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
+    Checking: dns.google (A) using System Default DNS...
+      => [OK] 期待値が含まれています。 (検出: ['8.8.4.4', '8.8.8.8'])
 ----------------------------------------
   ```
 
