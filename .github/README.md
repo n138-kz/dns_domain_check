@@ -70,9 +70,9 @@
 
 
 1. 依存ライブラリをインストールする
-   ```sh
-   python3 -m pip install -r requirements.txt
-   ```
+  ```sh
+  python3 -m pip install -r requirements.txt
+  ```
 2. python3 コマンド経由でスクリプトを実行する。
   ```sh
   python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
