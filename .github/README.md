@@ -45,6 +45,8 @@
 
 - Python version: 3.7 or over
 
+---
+
 1. 依存ライブラリをインストールする  
     ```sh
     python3 -m pip install -r requirements.txt
