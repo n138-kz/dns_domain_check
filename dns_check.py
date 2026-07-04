@@ -77,7 +77,7 @@ def check_single_target(domain, rdtype, expected, dns_server=None):
         print(f"  => {COLOR_RED}[NG]{COLOR_RESET} ドメインが存在しません。")
     except Exception as e:
         print(f"  => {COLOR_RED}[ERROR]{COLOR_RESET} エラーが発生しました: {e}")
-        
+
     print("-" * 40)
     return False
 
@@ -89,32 +89,53 @@ def main():
     parser.add_argument("--value", "--expectedvalue", help="期待する値")
     parser.add_argument("--dns", help="一時的に使用するDNSサーバーのIPアドレス (例: 8.8.8.8)")
     parser.add_argument("--file", default="check-domain.json", help="読み込むJSONファイルパス (デフォルト: check-domain.json)")
-    
+
     args = parser.parse_args()
 
     # CLI引数が指定された場合
     if args.domain:
         if not args.type or not args.value:
             parser.error("--domain を指定する場合は、--type と --value（または --expectedvalue）も必須です。")
-        
+
         success = check_single_target(args.domain, args.type.upper(), args.value, dns_server=args.dns)
         sys.exit(0 if success else 1)
-    
+
     # 引数がない場合はJSONファイルから一括チェック
     else:
         try:
             with open(args.file, 'r', encoding='utf-8') as f:
                 targets = json.load(f)
-            for target in targets:
-                check_single_target(
-                    target.get("domain"), 
-                    target.get("type"), 
-                    target.get("expectedvalue"),
-                    dns_server=args.dns
-                )
         except FileNotFoundError:
-            print(f"{COLOR_RED}[ERROR]{COLOR_RESET} JSONファイル '{args.file}' が見つかりません。")
-            sys.exit(1)
+            # ファイルが見つからない場合は雛形を作成する
+            print(f"[INFO] '{args.file}' が見つかりません。新規に雛形を作成します。")
+
+            # 雛形データ
+            default_data = [
+                {
+                    "domain": "dns.google",
+                    "type": "A",
+                    "expectedvalue": "8.8.8.8"
+                }
+            ]
+
+            # ファイル書き込み
+            try:
+                with open(args.file, 'w', encoding='utf-8') as f:
+                    json.dump(default_data, f, indent=4, ensure_ascii=False)
+                print(f"[INFO] 雛形ファイルを '{args.file}' として保存しました。")
+                targets = default_data
+            except Exception as e:
+                print(f"{COLOR_RED}[ERROR]{COLOR_RESET} 雛形ファイルの作成に失敗しました: {e}")
+                sys.exit(1)
+
+        # 読み込んだ（または自動生成した）データを元にチェックを実行
+        for target in targets:
+            check_single_target(
+                target.get("domain"),
+                target.get("type"),
+                target.get("expectedvalue"),
+                dns_server=args.dns
+            )
 
 
 if __name__ == "__main__":
