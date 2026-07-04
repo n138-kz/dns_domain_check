@@ -44,8 +44,8 @@
 ## How to use
 
 1. JSONファイルを作成する
-  ファイル名: `check-domain.json`
-  内容: 
+  ファイル名: `check-domain.json`  
+  内容:   
   ```json
   [
     {
