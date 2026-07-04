@@ -44,6 +44,7 @@
 ## How to use
 
 - Python version: 3.7 or over
+- dnspython>=2.0.0
 
 ---
 
