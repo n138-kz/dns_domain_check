@@ -1,6 +1,7 @@
 import json
 import argparse
 import sys
+import os  # パス操作のために追加
 
 # ANSIエスケープシーケンスによる文字色の定義
 COLOR_RED = "\033[31m"
@@ -83,12 +84,17 @@ def check_single_target(domain, rdtype, expected, dns_server=None):
 
 
 def main():
+    # スクリプトファイルが存在するディレクトリの絶対パスを取得
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # デフォルトのJSONファイルパスをスクリプト基準にする
+    default_json_path = os.path.join(script_dir, "check-domain.json")
+
     parser = argparse.ArgumentParser(description="DNS Name Resolution Checker")
     parser.add_argument("--domain", help="チェックしたいドメイン名")
     parser.add_argument("--type", help="レコードタイプ (A, AAAA, TXT, NS, CNAMEなど)")
     parser.add_argument("--value", "--expectedvalue", help="期待する値")
     parser.add_argument("--dns", help="一時的に使用するDNSサーバーのIPアドレス (例: 8.8.8.8)")
-    parser.add_argument("--file", default="check-domain.json", help="読み込むJSONファイルパス (デフォルト: check-domain.json)")
+    parser.add_argument("--file", default=default_json_path, help="読み込むJSONファイルパス (デフォルト: スクリプトと同階層の check-domain.json)")
 
     args = parser.parse_args()
 
@@ -106,7 +112,7 @@ def main():
             with open(args.file, 'r', encoding='utf-8') as f:
                 targets = json.load(f)
         except FileNotFoundError:
-            # ファイルが見つからない場合は雛形を作成する
+            # 引数で別のパスが明示的に指定されていない場合のみ、自動生成のメッセージに絶対パスを表示する
             print(f"[INFO] '{args.file}' が見つかりません。新規に雛形を作成します。")
 
             # 雛形データ
