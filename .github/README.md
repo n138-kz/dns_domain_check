@@ -45,7 +45,11 @@
 
 - Python version: 3.7 or over
 
-1. JSONファイルを作成する
+1. 依存ライブラリをインストールする
+   ```sh
+   python3 -m pip install -r requirements.txt
+   ```
+2. JSONファイルを作成する
   ファイル名: `check-domain.json`  
   内容:   
   ```json
@@ -57,14 +61,19 @@
     }
   ]
   ```
-2. python3 コマンド経由でスクリプトを実行する。
+3. python3 コマンド経由でスクリプトを実行する。
   ```sh
   python3 dns_check.py
   ```
 
 ---
 
-1. python3 コマンド経由でスクリプトを実行する。
+
+1. 依存ライブラリをインストールする
+   ```sh
+   python3 -m pip install -r requirements.txt
+   ```
+2. python3 コマンド経由でスクリプトを実行する。
   ```sh
   python3 dns_check.py --domain dns.google --type a --value 8.8.8.8
   ```
